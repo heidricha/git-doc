@@ -83,17 +83,18 @@ cd your_master_dir_for_git_resources
 git clone url_for_repository [local dir for repository]
 ```
 
-### setup environment
+### Setup environment
 
 .gitignore file - contains the file name patterns that should not be observed
   - relative to repository root
   - ** means a path of arbitrary length
 
-samples
-  - *.pyc
+sample lines
+  - *.pyc 
   - /.history/
+  - **/.vscode
 
-### status commands
+### Status commands
 show current config
 ```
 git config --list
@@ -124,14 +125,14 @@ git remote show
 git remote show origin # detailed data form an upstream
 ```
 
-### update changed repository
+### Update changed repository
 ```
-git add . # or list files instead of the ".", file specification can be omitted if need to add all files (see next command)
-git commit -m "command" # also add "-a" if want to add all modified files
-git push # name the upstream if not sure
+git add .
+git commit -m "command"
+git push
 ```
 
-### branches
+### Branches
 create local branch, and make use it
 ```
 git checkout -b mynewbranch
@@ -140,21 +141,36 @@ publish the local branch to upstream "origin"
 ```
 git push -u origin mynewbranch # remote branch name can be different from local (but not recommended)
 ```
+### Merging branches
+__branching__: fork a new history line from an existing snapshot
+
+__merge__: uniting two branches, known on many names: merge, pull, push, rebase
+
+merges are totally normal, happen very often (most server operations is a merge, since the remote repository and the local repository shall be unified), most of the time (changed files are different, changes in the same file can be performed without affecting each other) it isn't even noticable, done automatically.
+
+merges are usually visible in the history graph as node which has two ancestors.
+_fast-forward_ merges has no separate nodes (f.e. when one pulls the upstream changes to keep its own branch up-to-date).
+
+_rebase_ means, that the commits themself will be moved from the merged branch to the target branch. rewrites history, which results a simpler graph (single line history), no merge commit; but loose track of the original branch/merge.
+
+__conflict__: when the same portion of the same file has been modified differently in the two branches to be merged. a __confict__ must be resolved by the developer who initiated the merge. Resolve means, that the resolver must conclude a file status, commit and push it. Always creates a new commit. 
+
+Resolving conflicts often called "merge" as well, which is a pity.
 
 ### repository states
 
 repository state is the sync state between working copy and the local repository (branch)
 
-clean: all changes are staged and commited
+__clean__: all changes are staged and commited
 
-unclean: there are unstaged/uncommited changes
+__unclean__: there are unstaged/uncommited changes
 
 server operations (push, pull, merge) are only possible, if repo state is clean
 
 clean state can be achived by:
   - commit - introducing staged changes to repo
   - stash - postponing local changes for later use
-  - revert - drop local changes
+  - reset - drop/revert local changes
 
 ### patching
 commits can be viewed as multifile patches that lead from snapshot to the next one. 
@@ -202,8 +218,19 @@ saves local diff with the message for later use, cleans repo state.
 ```
 git stash pop
 ```
-
 applies the latter stashed patch.
+
+### Revoke local changes
+
+revokes all commits back to commit named HEAD, local changes preserved, repo is unclean again with unstaged changes
+```
+git reset HEAD
+```
+
+revoke all commits back too, but also set back all files as they were in that snapshot
+```
+git reset --hard HEAD
+```
 
 ### workflow samples
 developement - dev branch, no others
