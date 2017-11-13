@@ -44,6 +44,10 @@ git config --global user.mail "attila.heidrich@gmail.com"
 git config --global http.proxy "http://10.232.127.19:3128"
 ```
 
+To remove settings use --unset, like 
+```
+git config --global --unset http.proxy
+```
 ### Git server access / authentication
 Git server is a hub for the developers as spokes, handles users/groups/access rights and additional stuff, like Wiki, tickets, pull requests (see later), UI for many operation steps.
 Uses "bare" repository, no working copy (files) just the .git dir with the snapshots and related stuff.
