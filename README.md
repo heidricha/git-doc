@@ -271,3 +271,18 @@ bugfix
   - checkout production
   - pull bugfix-20171108
   - fingers crossed
+
+  ## References
+
+  My simplified sketch:
+  
+    - https://sketchboard.me/pAKlzpcYDVBD#/
+
+  A very good visual representation of git operation, both locally and towards upstreams:
+  
+    - http://ndpsoftware.com/git-cheatsheet.html
+
+  The most official git documentation:
+
+    - https://git-scm.com/book/en/v2
+    - https://git-scm.com/documentation
