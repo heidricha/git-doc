@@ -274,7 +274,7 @@ bugfix
     - test again
   - checkout production
   - pull bugfix-20171108
-  - fingers crossed
+  - two fingers crossed
 
   ## References
 
