@@ -141,10 +141,13 @@ create local branch, and make use it
 ```
 git checkout -b mynewbranch
 ```
+
 publish the local branch to upstream "origin"
 ```
-git push -u origin mynewbranch # remote branch name can be different from local (but not recommended)
+git push -u origin mynewbranch # 
 ```
+remote branch name can be different from local (but not recommended)
+
 ### Merging branches
 __branching__: fork a new history line from an existing snapshot
 
@@ -214,14 +217,25 @@ a diff is a unix patch file, can be sent by mail f.e. for others to test local c
 stash:  
 
 ```
-git stash create message
+git stash save "message"
 ```
 
-saves local diff with the message for later use, cleans repo state.
+saves local changes with the message for later use, cleans repo state.
+
+```
+git stash list
+```
+
+shows the stash content
+
+```
+git stash apply ...
+```
 
 ```
 git stash pop
 ```
+
 applies the latter stashed patch.
 
 ### Revoke local changes
