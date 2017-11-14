@@ -118,30 +118,43 @@ sample lines
 
 ### Status commands
 show current config
+
 ```
 git config --list
 ```
+
 show status of local repository after diverting from upstream
+
 ```
 git status
 ```
+
 create a complete diff file of the local changes. can be sent by mail, or whatever, like a patch
+
 ```
 git diff
 ```
+
 show the log of the current branch
+
 ```
 git log # --graph
 ```
+
 show the changes after you divert (these would be pulled)
+
 ```
 git log --stat ...origin/HEAD
 ```
+
 display existing branches
+
 ```
 git branch
 ```
+
 show origins (upstreams)
+
 ```
 git remote show
 git remote show origin # detailed data form an upstream
