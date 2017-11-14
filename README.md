@@ -307,7 +307,7 @@ release (dev branch is tested)
   - checkout development
   - pull dev
   - git tag newversion
-  - fingers crossed
+  - all fingers crossed
 
 bugfix
   - checkout production
