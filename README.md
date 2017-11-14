@@ -9,13 +9,33 @@ git main features
   - snapshot based
   - branch/merge model
 
-git repositorys history is a web of filesystem snapshots, or a single rooted directed graph where the nodes are the commits/snapshots, there is only a single root and every node is connected to its ancestors (maybe more) but the root itself (which has no ancestor)
+## Basics, terminology
 
-each commit is identified by a hash
+A "git repository" is set of filesystem snapshots and their earlier states back to the initial state. only files that has been changed since the previous snapshot are stored.
 
-labels can be assigned to commits, called TAGs
+A "working copy" is a local filesystem / folder. Contains a (possibly modified) snapshot from the repository.
 
-there is at least one "end" node at the end of all distinct pathes - called branch. Every branch is identified a special TAG (HEAD) labelling the lead commit of the branch.
+git repositories' history is a web of filesystem snapshots, it's a single rooted (root is the initial snapshot, or commit) directed graph where the nodes are the commits/snapshots, and the edges are the "ancestor is" relations. Each commit is identified by a hash.
+
+There is only a single root and every node is connected to its ancestors but the root itself (which has no ancestor).
+
+Branches are parallel ways in the graph. Branches can be named or implicite.
+
+TAGs are simply labels, or names, that can be assigned to commits.
+
+Every branch has a special TAG (HEAD) labelling the latest commit of the branch.
+
+## Working with git
+
+Phases:
+  - local operations:
+    - local change: by editing the files of the working copy
+    - stage: by adding changed files to a temporary inged (called "index", or "staging area")
+    - commit: creating a snapshot of the lately staged changes with a comment
+  - remote operations:
+    - clone: create a local copy from a remote repository usually with working copy
+    - push: uploading a local sequence of commits
+    - pull: download ("fetch") and apply ("merge") a sequence of commits from a remote repository over the local one
 
 ## Install
   - linux
@@ -24,7 +44,7 @@ there is at least one "end" node at the end of all distinct pathes - called bran
   - windows
     - https://git-scm.com/download/win
 
-## Usage
+## Tools
   - windows
     - git-scm provides command line tools different types as embeddable and also as standalone windows app
       - https://git-scm.com/download/win
@@ -32,8 +52,8 @@ there is at least one "end" node at the end of all distinct pathes - called bran
       - cmd
       - sh
   - GUI/IDE
-    - builtin log browser: gitk
-    - use your beloved IDE, like "code", "atom", ...
+    - builtin: gitk
+    - use your beloved IDE, like "code", "atom", pycharm, idea, eclipse, ...
     - https://sourceforge.net/projects/vscode-portable/
 
 
@@ -44,12 +64,12 @@ git config --global user.mail "attila.heidrich@gmail.com"
 git config --global http.proxy "http://10.232.127.19:3128"
 ```
 
-To remove settings use --unset, like 
+To remove settings use --unset: 
 ```
 git config --global --unset http.proxy
 ```
 ### Git server access / authentication
-Git server is a hub for the developers as spokes, handles users/groups/access rights and additional stuff, like Wiki, tickets, pull requests (see later), UI for many operation steps.
+Git server is kind of a hub for common access, handles users/groups/access rights and additional stuff, like Wiki, tickets, pull requests (see later), UI for many operation steps.
 Uses "bare" repository, no working copy (files) just the .git dir with the snapshots and related stuff.
 
 Popular server side web UIs:
@@ -62,9 +82,7 @@ Popular open hubs:
   - github.com
   - gitlab.com
 
-For groups/individuals the project master sets the access rigths
-
-For deployments, the ssh way is the only option, _deployment keys_ are handled separately, always readonly access, no accidental pushes etc.
+For groups/individuals the project master sets the access rigths.
 
 ### Create new repo from local dir
 For server population, the project with the repository should be created first (usually easy on web UI)
@@ -72,12 +90,12 @@ For server population, the project with the repository should be created first (
 ```
 mkdir mysource
 cd mysource
-git init # creates a new repository in current dir
+git init                        # creates a new repository in current dir
 touch README.md
 git remote add origin https://github.com/heidricha/test.git
-git add .
-git commit -m "initial commit"
-git push -u origin master
+git add .                       # stages all files in the current dir recursively
+git commit -m "initial commit"  # creates a snapshot from the staged files with the "comment"
+git push -u origin master       # publish the commit towards the server
 ```
 
 ### Download existing repo from the upstream repository ("server")
