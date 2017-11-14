@@ -307,11 +307,7 @@ release (dev branch is tested)
   - checkout development
   - pull dev
   - git tag newversion
-<<<<<<< HEAD
   - two fingers crossed
-=======
-  - all fingers crossed
->>>>>>> 8987f782b4c6acdc2b4272b5872985b9fa23e8d8
 
 bugfix
   - checkout production
