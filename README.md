@@ -98,6 +98,7 @@ sample lines
   - /.history/
   - **/.vscode
 
+
 ### Status commands
 show current config
 ```
